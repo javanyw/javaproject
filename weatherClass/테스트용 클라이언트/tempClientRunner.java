@@ -56,7 +56,7 @@ public class tempClientRunner {
         System.out.println("[연결 성공]");
         ByteBuffer byteBuffer = null;
         Charset charset = Charset.forName("UTF-8");
-        byteBuffer = charset.encode("부산-날씨-2018,10,15");//지역-날씨-년도,월,일 반드시 이 형식으로 해야 함 서버내 코드를 바꾸면 형식을 바꿀 수도 있음
+        byteBuffer = charset.encode("전주-날씨-2018,10,15");//지역-날씨-년도,월,일 반드시 이 형식으로 해야 함 서버내 코드를 바꾸면 형식을 바꿀 수도 있음
         socketChannel.write(byteBuffer);
         System.out.println("[데이터 보내기 성공]");
         byteBuffer = ByteBuffer.allocateDirect(2000);
