@@ -129,7 +129,8 @@ public class weatherClass {
         //calDateDays = Math.abs(calDateDays);
         if(calDateDays>3&&calDateDays<=10){//3일후
             String datedays = Long.toString(calDateDays);
-            System.out.println(datedays);
+            //System.out.print("날짜 차이 : ");
+            //System.out.println(datedays);
             try {
                 URL url = new URL(urlAdr.toString());
                 HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -153,8 +154,8 @@ public class weatherClass {
                         if (node.getNodeName().contains(datedays)) {
 
                             resultBuilding.append(node.getTextContent());
-                            //resultBuilding.append("%n");
-                            System.out.println(resultBuilding.toString());
+
+
                             resultBuilding.append("\n");
                             break;
                         }
@@ -207,15 +208,15 @@ public class weatherClass {
                         Node node2 = child2.item(j);
                         if (node2.getNodeName().contains(datedays)) {
                             if(f==0){
-                                resultBuilding.append("최고 온도");
+                                resultBuilding.append("최고 온도 : ");
                                 f++;
                             }
                             else if(f==1){
-                                resultBuilding.append("최저 온도");
+                                resultBuilding.append("최저 온도 : ");
                             }
                             resultBuilding.append(node2.getTextContent());
-                            //resultBuilding.append("%n");
-                            System.out.println(resultBuilding.toString());
+
+
                             resultBuilding.append("\n");
 
                         }
@@ -278,8 +279,8 @@ public class weatherClass {
 
 
                             resultBuilding.append(node3.getTextContent());
-                            //resultBuilding.append("%n");
-                            System.out.println(resultBuilding.toString());
+
+
                             resultBuilding.append("\n");
 
                         }
@@ -329,16 +330,16 @@ public class weatherClass {
     }
     public static void initialize(){
         regionCode[] data ={//중기 육상, 신뢰도
-                new regionCode("11B00000","서울, 인천,경기도"),
-                new regionCode("11D10000","강원도영서"),
-                new regionCode("11D20000","강원도영동"),
-                new regionCode("11C20000","대전, 세종, 충청남도"),
+                new regionCode("11B00000","서울, 인천,경기도,수원,파주"),
+                new regionCode("11D10000","강원도영서,춘천, 원주"),
+                new regionCode("11D20000","강원도영동, 영동"),
+                new regionCode("11C20000","대전, 세종, 충청남도, 서산"),
                 new regionCode("11C10000", "충청북도"),
-                new regionCode("11F20000","광주, 전라남도"),
-                new regionCode("11F10000","전라북도"),
-                new regionCode("11H10000","대구, 경상북도"),
-                new regionCode("11H20000","부산, 울산, 경상남도"),
-                new regionCode("11G0000","제주도")
+                new regionCode("11F20000","광주, 전라남도, 목포, 여수"),
+                new regionCode("11F10000","전라북도, 전주, 군산"),
+                new regionCode("11H10000","대구, 경상북도, 안동, 포항"),
+                new regionCode("11H20000","부산, 울산, 경상남도, 창원"),
+                new regionCode("11G0000","제주도, 서귀포")
         };
         for(regionCode p : data){
             regionCodes.add(p);
