@@ -13,11 +13,12 @@ public class tempServerRunner {
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(true);
             serverSocketChannel.bind(new InetSocketAddress(5001));//포트 열고 대기
-            while(true){//서버 유지
-                System.out.println("[연결 기다림]");
-                SocketChannel socketChannel = serverSocketChannel.accept();
-                InetSocketAddress isa = (InetSocketAddress) socketChannel.getRemoteAddress();
-                System.out.println("[연결 수락함] "+isa.getHostName());
+            //서버 유지
+            System.out.println("[연결 기다림]");
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            InetSocketAddress isa = (InetSocketAddress) socketChannel.getRemoteAddress();
+            System.out.println("[연결 수락함] "+isa.getHostName());
+            while(true){
                 ByteBuffer byteBuffer = null;
                 Charset charset = Charset.forName("UTF-8");
                 byteBuffer = ByteBuffer.allocate(100);
@@ -25,10 +26,11 @@ public class tempServerRunner {
                 byteBuffer.flip();
                 String message = charset.decode(byteBuffer).toString();
                 System.out.println("[데이터 받기 성공]: "+message);
-                if(message.contains("날씨")){
-                    weatherClass wC = new weatherClass(message);
-                    message = wC.run();
-                }
+
+                weatherClassMainPoint wC = new weatherClassMainPoint(message);
+                message = wC.getResult();
+
+
 
                 byteBuffer = charset.encode(message);
                 socketChannel.write(byteBuffer);
@@ -37,9 +39,9 @@ public class tempServerRunner {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
+
+        /*
         if(serverSocketChannel.isOpen()){
             try {
                 serverSocketChannel.close();
@@ -47,5 +49,6 @@ public class tempServerRunner {
                 e.printStackTrace();
             }
         }
+        */
     }
 }
